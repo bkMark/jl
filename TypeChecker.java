@@ -1,10 +1,10 @@
 import Javalette.Absyn.*;
 
 public class TypeChecker {
+    CheckProg progChecker = new CheckProg();
+    Env env = new Env();
 
     public void typecheck(Program p) {
-        throw new TypeException("Not yet a typechecker");
+        progChecker.visit(p, env);
     }
-
-
 }
