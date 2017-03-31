@@ -6,7 +6,7 @@ import java.io.*;
 public class jlc {
     public static void main(String args[]) {
         if (args.length != 1) {
-            System.err.println("Usage: lab2 <SourceFile>");
+            System.err.println("Usage: jlc <SourceFile>");
             System.exit(1);
         }
 

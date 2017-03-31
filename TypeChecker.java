@@ -6,4 +6,5 @@ public class TypeChecker {
         throw new TypeException("Not yet a typechecker");
     }
 
+
 }

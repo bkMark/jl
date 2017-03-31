@@ -25,6 +25,7 @@ hs_err_pid*
 
 # ide setup
 .idea/
+*.iml
 
 .DS_Store
 
