@@ -1,9 +1,10 @@
 import Javalette.Absyn.*;
 
 public class TypeChecker {
+    Env env = new Env();
 
     public void typecheck(Program p) {
-        throw new TypeException("Not yet a typechecker");
+        p.accept(new ProgramVisitor(), env);
     }
 
 
