@@ -1,4 +1,4 @@
-int main() { 
+int main() {
     boolean b=false;
-    while(b) return 0; 
+    while(b) return 0;
 }

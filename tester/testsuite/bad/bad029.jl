@@ -1,3 +1,3 @@
-int main() { 
+int main() {
     while(false) return 0;
 }

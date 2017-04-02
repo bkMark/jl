@@ -65,7 +65,7 @@ testAll compiler testProg exts testSuitePath00 groupPath0 = do
 
   exePath <- makeAbsolute exePath0
   groupPath <- makeAbsolute groupPath0
- 
+
   testSuitePath <- makeAbsolute testSuitePath0
   curDir <- getCurrentDirectory
   let exeDir = takeDirectory exePath
@@ -82,7 +82,7 @@ testAll compiler testProg exts testSuitePath00 groupPath0 = do
         testFiles <- getTestFilesForPath (testSuitePath </> p)
         putStrLn $ p ++ "..."
         rs <- testFunction exePath good testFiles
-        report p rs 
+        report p rs
         return (p, rs)
     putStrLn $ "Passed suites: " ++ (concat $ intersperse ", " $ [p | (p,rs) <- results, and rs])
     let tally = concat (map snd results)

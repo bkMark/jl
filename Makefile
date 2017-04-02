@@ -16,6 +16,9 @@ jlc:
 	${JAVAC} ${JAVAC_FLAGS} jlc.java
 	chmod a+x jlc
 
+%.class: %.java
+	${JAVA} ${JAVA_FLAGS} $< $@
+
 bnfc:
 	bnfc -java1.5 Javalette.cf
 	${JAVA} ${JAVA_FLAGS} JLex.Main Javalette/Yylex

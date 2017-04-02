@@ -15,9 +15,9 @@ public class ProgramVisitor implements Prog.Visitor<Env, Env> {
         printDoubleArgs.add(new Argument(new Doub(), "x"));
         env.sig.put("printDouble", new FunType(new Void(), printDoubleArgs));
 
-        ListArg printBoolArgs = new ListArg();
-        printBoolArgs.add(new Argument(new Bool(), "x"));
-        env.sig.put("printBool", new FunType(new Void(), printBoolArgs));
+//        ListArg printBoolArgs = new ListArg();
+//        printBoolArgs.add(new Argument(new Bool(), "x"));
+//        env.sig.put("printBool", new FunType(new Void(), printBoolArgs));
 
         ListArg printStringArgs = new ListArg();
         printStringArgs.add(new Argument(new Str(), "x"));

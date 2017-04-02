@@ -32,6 +32,9 @@ public class StmtVisitor implements Stmt.Visitor<Env, Env> {
     @Override
     public Env visit(Ass stmt, Env env) {
         Type idType = env.lookupVar(stmt.ident_);
+        if (idType == null) {
+            throw new TypeException("undefined variable identification");
+        }
         checkType(idType, stmt.expr_.accept(new ExprVisitor(), env));
         return env;
     }
@@ -78,7 +81,7 @@ public class StmtVisitor implements Stmt.Visitor<Env, Env> {
         env.enterCtx();
         stmt.stmt_.accept(new StmtVisitor(), env);
         env.leaveCtx();
-        return null;
+        return env;
     }
 
     @Override
@@ -90,7 +93,7 @@ public class StmtVisitor implements Stmt.Visitor<Env, Env> {
         env.enterCtx();
         stmt.stmt_2.accept(new StmtVisitor(), env);
         env.leaveCtx();
-        return null;
+        return env;
     }
 
     @Override

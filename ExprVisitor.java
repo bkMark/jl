@@ -94,13 +94,15 @@ public class ExprVisitor implements Javalette.Absyn.Expr.Visitor<Type, Env> {
 
     @Override
     public Type visit(Neg exp, Env env) {
-        checkType(new Bool(), visit(exp, env));
-        return new Bool();
+        Type expType = visit(exp.expr_, env);
+        if (!(expType instanceof Int) && !(expType instanceof Doub))
+            throw new TypeException("applying neg operator on none supported type");
+        return expType;
     }
 
     @Override
     public Type visit(Not exp, Env env) {
-        checkType(new Bool(), visit(exp, env));
+        checkType(new Bool(), visit(exp.expr_, env));
         return new Bool();
     }
 
@@ -108,6 +110,9 @@ public class ExprVisitor implements Javalette.Absyn.Expr.Visitor<Type, Env> {
     public Type visit(EMul exp, Env env) {
         Type exp1Type = visit(exp.expr_1, env);
         Type exp2Type = visit(exp.expr_2, env);
+        if (exp.mulop_ instanceof Mod && !exp1Type.equals(new Int()))
+            throw new TypeException("Applying Mod operation on unsupport type");
+
         checkType(exp1Type, exp2Type);
         if (!exp1Type.equals(new Int()) && !exp2Type.equals(new Doub()))
             throw new TypeException("Multiplying unsupport type");
@@ -131,7 +136,8 @@ public class ExprVisitor implements Javalette.Absyn.Expr.Visitor<Type, Env> {
         checkType(exp1Type, exp2Type);
         if (!exp1Type.equals(new Int())
                 && !exp2Type.equals(new Doub())
-                && ! exp1Type.equals(new Str()))
+                && !exp1Type.equals(new Str())
+                && !exp1Type.equals(new Bool()))
             throw new TypeException("Comparing unsupport type");
         return new Bool();
     }

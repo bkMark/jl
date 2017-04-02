@@ -19,7 +19,7 @@ public class jlc {
             new Interpreter().interpret(parse_tree);
 
         } catch (TypeException e) {
-            System.out.println("TYPE ERROR");
+            System.err.println("ERROR");
             System.err.println(e.toString());
             System.exit(1);
         } catch (RuntimeException e) {
@@ -30,7 +30,7 @@ public class jlc {
             System.err.println(e.toString());
             System.exit(1);
         } catch (Throwable e) {
-            System.out.println("SYNTAX ERROR");
+            System.err.println("ERROR");
             System.out.println("At line " + String.valueOf(l.line_num())
                        + ", near \"" + l.buff() + "\" :");
             System.out.println("     " + e.getMessage());

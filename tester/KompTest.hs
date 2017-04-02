@@ -29,7 +29,7 @@ data Backend = Backend
 --
 
 -- | Print an error message with the given color.
-printErrorColor :: Color 
+printErrorColor :: Color
                 -> String -- ^ command that failed
                 -> String -- ^ how it failed
                 -> FilePath -- ^ source file
@@ -81,7 +81,7 @@ defRep = ErrorReport
   , repSrc      = ""
   , repStdIn    = ""
   , repStdOut   = ""
-  , repStdErr   = "" 
+  , repStdErr   = ""
   }
 
 -- | Turn an error report into an error or warning respectively.
@@ -112,14 +112,14 @@ reportMaybe = maybe (return True) reportError
 -- | Print the contents of a file.
 prFile :: FilePath -> IO ()
 prFile f = do
-  putStrLn $ "---------------- begin " ++ f ++ " ------------------" 
+  putStrLn $ "---------------- begin " ++ f ++ " ------------------"
   s <- readFile f
   putStrLn $ color green s
-  putStrLn $ "----------------- end " ++ f ++ " -------------------" 
+  putStrLn $ "----------------- end " ++ f ++ " -------------------"
 
 -- | Report how many tests passed.
 report :: String -> [Bool] -> IO ()
-report n rs = 
+report n rs =
   do let (p,t) = (length (filter id rs), length rs)
      putStrLn $ n ++ ": passed " ++ show p ++ " of " ++ show t ++ " tests"
 --
@@ -165,7 +165,7 @@ runProg c f i o = do
 --   source file already exists.
 test :: [FilePath] -> Backend -> IO [Bool]
 test fs b = do
-  putStrLn $ color green $ "Backend: " ++ name b 
+  putStrLn $ color green $ "Backend: " ++ name b
   mapM testProg fs
   where
     testProg f = do
@@ -195,7 +195,7 @@ type TestFunction = FilePath -> Bool -> [FilePath] -> IO [Bool]
 --   indicating for each test whether it behaved as expected (i.e.
 --   failed/passed where supposed to).
 testCompilation :: TestFunction
-testCompilation c good fs = 
+testCompilation c good fs =
   do x <- doesFileExist c
      forM fs $ \t -> reportError =<< do
        if x then testCompilationProg c good t
@@ -209,10 +209,10 @@ testCompilationProg path good f = do
   (out,err,_) <- runCommandStrWait c ""
   let rep = defRep {repCmd = f, repStdOut = out, repStdErr = err}
   lns <- return $ lines err
-  return $ case filter (not . null) lns of 
+  return $ case filter (not . null) lns of
     msgs | isOk    msgs -> if good
                              then rep
-                             else rep ?! "passed BAD program" 
+                             else rep ?! "passed BAD program"
          | isError msgs -> if good
                              then rep ?! "failed OK program"
                              else rep
