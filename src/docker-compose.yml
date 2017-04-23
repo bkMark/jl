@@ -8,14 +8,14 @@ services:
         tty: true
         environment:
             PYTHONIOENCODING: utf-8
-            CLASSPATH: "/work:/work/Cup/"
+            CLASSPATH: "/opt/lib:/opt/lib/jflex:./"
             DEPLOY: DEVDOCKER
             NOSE_NOCAPTURE: 1
         ports:
             - "80:80"
             - "8000:8000"
         volumes:
-            - "/root/.ssh/:/root/.ssh/"
+            - "~/.ssh/:/root/.ssh/"
             - "./:/work/"
         # command:
         #     cd /work/ && make && cd tester && make && ./Grade ..

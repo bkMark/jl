@@ -4,6 +4,8 @@
 
 * bnfc
 * jdk >=1.7
+* Cup
+* JLex
 
 ## Steps for compile the code
 

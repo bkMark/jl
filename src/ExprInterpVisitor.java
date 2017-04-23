@@ -78,15 +78,17 @@ public class ExprInterpVisitor implements Javalette.Absyn.Expr.Visitor<Value, En
         }
 
         if (expr.ident_.equals("printInt")) {
-            System.out.println(values.get(0).value);
+            // System.out.println(values.get(0).value);
         } else if (expr.ident_.equals("printDouble")) {
-            System.out.println(values.get(0).value);
+            // System.out.println(values.get(0).value);
         } else if (expr.ident_.equals("printString")) {
-            System.out.println(values.get(0).value);
+            // System.out.println(values.get(0).value);
         } else if (expr.ident_.equals("readInt")) {
-            return new VInt(env.getInput().nextInt());
+            // return new VInt(env.getInput().nextInt());
+            return new VInt(0);
         } else if (expr.ident_.equals("readDouble")) {
-            return new VDoub(env.getInput().nextDouble());
+            // return new VDoub(env.getInput().nextDouble());
+            return new VDoub(0.0);
         } else {
             //get function record from env
             String fId = expr.ident_;

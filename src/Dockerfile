@@ -1,6 +1,6 @@
 FROM ubuntu:xenial
 
-ENV LANG            C.UTF-8
+ENV LANG C.UTF-8
 
 RUN echo 'deb http://ppa.launchpad.net/hvr/ghc/ubuntu trusty main' > /etc/apt/sources.list.d/ghc.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F6F88286 && \
@@ -24,5 +24,13 @@ ENV PATH /root/.cabal/bin:/root/.local/bin:/opt/cabal/1.24/bin:/opt/ghc/8.0.2/bi
 
 RUN cabal update && cabal install temporary
 
+ADD http://www2.cs.tum.edu/projects/cup/releases/java-cup-bin-11b-20160615.tar.gz /
+ADD http://www.jflex.de/release/jflex-1.6.1.tar.gz /
+ADD http://www.cse.chalmers.se/edu/year/2016/course/DAT151_Programming_Language_Technology/doc/javatools.tgz /
+
+RUN mkdir /opt/lib && \
+    tar zxf /java-cup-bin-11b-20160615.tar.gz -C /opt/lib/ && \
+    tar zxf jflex-1.6.1.tar.gz -C /opt/lib/ && \
+    tar zxf /javatools.tgz -C /opt/lib/
 VOLUME /work
 WORKDIR /work
